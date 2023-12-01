@@ -1,4 +1,8 @@
-const URL = `https://api.quotable.io/random`;
+const DOMSelectors = {
+    form: document.querySelector("#form"),
+    btn: document.getElementById("#btn"),
+}
+const URL = `https://coffee.alexflipnote.dev/random`;
 async function getData(URL) {
 try {
     const response = await fetch(URL);
@@ -6,10 +10,12 @@ try {
         throw new Error (response.statusText);
     }
     const data = await response.json();
-    document.querySelector("h1").textContent = data.content;
+    document.querySelector("img").src = data.src;
 } catch (error) {
     console.log(error, "There was an error");
     document.querySelector("h1").textContent = "Error"
 }
 }
-    getData(URL);
+getData(URL);
+
+    
