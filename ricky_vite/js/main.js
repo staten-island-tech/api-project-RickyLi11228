@@ -6,9 +6,10 @@ const DOMSelectors = {
     sweet: document.querySelector('.sweet'),
     spicy: document.querySelector('.spicy'),
     all: document.querySelector('.all'),
+    search: document.querySelector('.search'),
 }
 
-const URLs = `https://db.ygoprodeck.com/api/v7/cardinfo.php`;
+const URLs = `https://digimon-api.vercel.app/api/digimon`;
 async function getData(URLs) {
 try {
     const response = await fetch(URLs);
@@ -16,16 +17,17 @@ try {
         throw new Error (response.statusText);
     }
     const data = await response.json();
-    //data.data.forEach((data)=> console.log(data.name));
-    //document.querySelector("h1").textContent = data;
+    data.forEach((data)=> console.log(data.name));
+    document.querySelector("h1").textContent = data;
+    data.forEach((card) => console.log(card.img));
     function insertCards(arr){
-        arr.data.forEach((card) => {
+        arr.forEach((card) => {
             DOMSelectors.column.insertAdjacentHTML(
                 "beforeend",
                 `<div class="card">
                     <h3 class = "name">${card.name}</h3>
                     <img src="${card.img}" class="img">
-                    <h4>Price: ${card.price}</h4>
+                    <h4>Price: ${card.level}</h4>
                 </div>`
             )
         });
@@ -37,13 +39,3 @@ try {
 }
 }
 getData(URLs);
-data.data.forEach((card) => {
-    DOMSelectors.column.insertAdjacentHTML(
-        "beforeend",
-        `<div class="card">
-            <h3 class = "name">${card.name}</h3>
-            <img src="${card.img}" class="img">
-            <h4>Price: ${card.price}</h4>
-        </div>`
-    )
-});
