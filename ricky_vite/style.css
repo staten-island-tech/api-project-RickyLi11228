@@ -1,16 +1,16 @@
 .column {
-  display:flex;
-  width: 90%;
-  height: 110%;
-  flex-wrap:wrap;
-  justify-content: space-around;
-  margin: 10rem auto;
+display:flex;
+width: 90%;
+height: 110%;
+flex-wrap:wrap;
+justify-content: space-around;
+margin: 10rem auto;
 }
 .center {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content: space-around;
-  margin: 5rem auto;
+display:flex;
+flex-wrap:wrap;
+justify-content: space-around;
+margin: 5rem auto;
 }
 .card {
 transition-delay: 0.2s;
@@ -85,7 +85,7 @@ h3 {
   box-shadow: 0 10px 0.5rem rgba(0, 0, 0, 0);
 }
 
-.all, .sour, .sweet, .spicy, .theme-btn {
+.column, .sour, .sweet, .spicy, .theme-btn {
   background-color: rgb(255, 255, 255);
     border-radius: 5px;
     border-color: black;

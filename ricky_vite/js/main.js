@@ -18,7 +18,6 @@ try {
     }
     const data = await response.json();
     data.forEach((data)=> console.log(data.name));
-    document.querySelector("h1").textContent = data;
     data.forEach((card) => console.log(card.img));
     function insertCards(arr){
         arr.forEach((card) => {
@@ -27,12 +26,18 @@ try {
                 `<div class="card">
                     <h3 class = "name">${card.name}</h3>
                     <img src="${card.img}" class="img">
-                    <h4>Price: ${card.level}</h4>
+                    <h4>Level: ${card.level}</h4> 
                 </div>`
             )
         });
     }
-    insertCards(data);
+    insertCards(data)
+    DOMSelectors.search.addEventListener('click', function() {
+        let newArr = data.filter((data) => data.name === data.name);
+        clearfields();
+        insertCards(newArr);
+    });
+    
 } catch (error) {
     console.log(error, "There was an error 🤓");
     document.querySelector("h1").textContent = "Error 🤓🤓🤓"
