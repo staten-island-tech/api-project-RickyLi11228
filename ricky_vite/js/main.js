@@ -7,6 +7,7 @@ const DOMSelectors = {
     spicy: document.querySelector('.spicy'),
     all: document.querySelector('.all'),
     search: document.querySelector('.search'),
+    input: document.querySelector('#input'),
 }
 
 const URLs = `https://digimon-api.vercel.app/api/digimon`;
@@ -17,8 +18,8 @@ try {
         throw new Error (response.statusText);
     }
     const data = await response.json();
-    data.forEach((data)=> console.log(data.name));
-    data.forEach((card) => console.log(card.img));
+    //data.forEach((data)=> console.log(data.name));
+    //data.forEach((card) => console.log(card.img));
     function insertCards(arr){
         arr.forEach((card) => {
             DOMSelectors.column.insertAdjacentHTML(
@@ -33,7 +34,7 @@ try {
     }
     insertCards(data)
     DOMSelectors.search.addEventListener('click', function() {
-        let newArr = data.filter((data) => data.name === data.name);
+        let newArr = data.filter((data) => data.name === input);
         clearfields();
         insertCards(newArr);
     });
