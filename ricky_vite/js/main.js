@@ -6,10 +6,12 @@ const DOMSelectors = {
     sweet: document.querySelector('.sweet'),
     spicy: document.querySelector('.spicy'),
     all: document.querySelector('.all'),
-    search: document.querySelector('.search'),
+    search: document.querySelector('#search'),
     input: document.querySelector('#input'),
 }
-
+function clearfields(){
+    DOMSelectors.column.innerHTML="";
+}
 const URLs = `https://digimon-api.vercel.app/api/digimon`;
 async function getData(URLs) {
 try {
@@ -32,16 +34,49 @@ try {
             )
         });
     }
-    insertCards(data)
+    insertCards(data);
     DOMSelectors.search.addEventListener('click', function() {
-        let newArr = data.filter((data) => data.name === input);
+        let input = DOMSelectors.input.value;
+        let newArr = data.filter((data) => data.name.toLowerCase() === input);
         clearfields();
-        insertCards(newArr);
+        if (newArr[length] != 1) {
+            insertCards(newArr);
+          } else {
+            document.querySelector("h1").textContent = "Error 🤓🤓🤓"
+          }
     });
-    
 } catch (error) {
     console.log(error, "There was an error 🤓");
     document.querySelector("h1").textContent = "Error 🤓🤓🤓"
 }
 }
 getData(URLs);
+DOMSelectors.search.addEventListener('click', function() {
+    let input = DOMSelectors.input.value;
+    let newArr = data.filter((data) => data.name.toLowerCase() === input);
+    clearfields();
+    if (newArr[length] != 1) {
+        insertCards(newArr);
+      } else {
+        document.querySelector("h1").textContent = "Error 🤓🤓🤓"
+      }
+});
+async function getData(URL){
+    try {
+        //requestion a response REST API's
+        const response = await fetch(URL);
+        //convert response to JSON
+        const data = await response.json();
+        DOMSelectors.search.addEventListener('click', function() {
+            let input = DOMSelectors.input.value;
+            let newArr = data.filter((data) => data.name.toLowerCase() === input);
+            clearfields();
+            if (newArr[length] != 1) {
+                insertCards(newArr);
+              } else {
+                document.querySelector("h1").textContent = "Error 🤓🤓🤓"
+              }
+        });
+    } catch (error) {}
+}
+getData(URL);
