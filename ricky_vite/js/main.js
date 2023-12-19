@@ -20,8 +20,6 @@ try {
         throw new Error (response.statusText);
     }
     const data = await response.json();
-    //data.forEach((data)=> console.log(data.name));
-    //data.forEach((card) => console.log(card.img));
     function insertCards(arr){
         arr.forEach((card) => {
             DOMSelectors.column.insertAdjacentHTML(
@@ -51,21 +49,9 @@ try {
 }
 }
 getData(URLs);
-DOMSelectors.search.addEventListener('click', function() {
-    let input = DOMSelectors.input.value;
-    let newArr = data.filter((data) => data.name.toLowerCase() === input);
-    clearfields();
-    if (newArr[length] != 1) {
-        insertCards(newArr);
-      } else {
-        document.querySelector("h1").textContent = "Error 🤓🤓🤓"
-      }
-});
-async function getData(URL){
+async function search(URLs){
     try {
-        //requestion a response REST API's
-        const response = await fetch(URL);
-        //convert response to JSON
+        const response = await fetch(URLs);
         const data = await response.json();
         DOMSelectors.search.addEventListener('click', function() {
             let input = DOMSelectors.input.value;
@@ -79,4 +65,4 @@ async function getData(URL){
         });
     } catch (error) {}
 }
-getData(URL);
+search(URL);
