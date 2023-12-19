@@ -12,6 +12,18 @@ const DOMSelectors = {
 function clearfields(){
     DOMSelectors.column.innerHTML="";
 }
+function insertCards(arr){
+    arr.forEach((card) => {
+        DOMSelectors.column.insertAdjacentHTML(
+            "beforeend",
+            `<div class="card">
+                <h3 class = "name">${card.name}</h3>
+                <img src="${card.img}" class="img">
+                <h4>Level: ${card.level}</h4> 
+            </div>`
+        )
+    });
+}
 const URLs = `https://digimon-api.vercel.app/api/digimon`;
 async function getData(URLs) {
 try {
@@ -20,29 +32,7 @@ try {
         throw new Error (response.statusText);
     }
     const data = await response.json();
-    function insertCards(arr){
-        arr.forEach((card) => {
-            DOMSelectors.column.insertAdjacentHTML(
-                "beforeend",
-                `<div class="card">
-                    <h3 class = "name">${card.name}</h3>
-                    <img src="${card.img}" class="img">
-                    <h4>Level: ${card.level}</h4> 
-                </div>`
-            )
-        });
-    }
     insertCards(data);
-    DOMSelectors.search.addEventListener('click', function() {
-        let input = DOMSelectors.input.value;
-        let newArr = data.filter((data) => data.name.toLowerCase() === input);
-        clearfields();
-        if (newArr[length] != 1) {
-            insertCards(newArr);
-          } else {
-            document.querySelector("h1").textContent = "Error 🤓🤓🤓"
-          }
-    });
 } catch (error) {
     console.log(error, "There was an error 🤓");
     document.querySelector("h1").textContent = "Error 🤓🤓🤓"
@@ -65,4 +55,4 @@ async function search(URLs){
         });
     } catch (error) {}
 }
-search(URL);
+search(URLs);
