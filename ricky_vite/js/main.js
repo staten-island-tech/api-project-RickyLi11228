@@ -1,13 +1,10 @@
 const DOMSelectors = {
     column: document.querySelector(".column"),
     btn: document.querySelectorAll(".btn"),
-    themeBtn: document.querySelector('.theme-btn'),
-    sour: document.querySelector('.sour'),
-    sweet: document.querySelector('.sweet'),
-    spicy: document.querySelector('.spicy'),
-    all: document.querySelector('.all'),
     search: document.querySelector('#search'),
     input: document.querySelector('#input'),
+    search2: document.querySelector('#search2'),
+    input2: document.querySelector('#input2'),
 }
 function clearfields(){
     DOMSelectors.column.innerHTML="";
@@ -33,6 +30,7 @@ try {
     }
     const data = await response.json();
     insertCards(data);
+    console.log(data)
 } catch (error) {
     console.log(error, "There was an error 🤓");
     document.querySelector("h1").textContent = "Error 🤓🤓🤓"
@@ -45,7 +43,17 @@ async function search(URLs){
         const data = await response.json();
         DOMSelectors.search.addEventListener('click', function() {
             let input = DOMSelectors.input.value;
-            let newArr = data.filter((data) => data.name.toLowerCase() === input);
+            let newArr = data.filter((data) => data.name.toLowerCase().includes(input));
+            clearfields();
+            if (newArr[length] != 1) {
+                insertCards(newArr);
+              } else {
+                document.querySelector("h1").textContent = "Error 🤓🤓🤓"
+              }
+        });
+        DOMSelectors.search2.addEventListener('click', function() {
+            let input2 = DOMSelectors.input2.value;
+            let newArr = data.filter((data) => data.level.toLowerCase().includes(input2));
             clearfields();
             if (newArr[length] != 1) {
                 insertCards(newArr);
