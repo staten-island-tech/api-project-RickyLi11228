@@ -15,7 +15,7 @@ function insertCards(arr){
             "beforeend",
             `<div class="card">
                 <h3 class = "name">${card.name}</h3>
-                <img src="${card.img}" class="img">
+                <img src="${card.img}" class="img" alt="${card.name, "pic"}">
                 <h4>Level: ${card.level}</h4> 
             </div>`
         )
