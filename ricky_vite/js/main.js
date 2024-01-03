@@ -5,6 +5,13 @@ const DOMSelectors = {
     input: document.querySelector('#input'),
     search2: document.querySelector('#search2'),
     input2: document.querySelector('#input2'),
+    training: document.querySelector('.training'),
+    rookie: document.querySelector('#rookie'),
+    champion: document.querySelector('#champion'),
+    ultimate: document.querySelector('#ultimate'),
+    fresh: document.querySelector('#fresh'),
+    mega: document.querySelector('#mega'),
+    armor: document.querySelector('#armor'),
 }
 function clearfields(){
     DOMSelectors.column.innerHTML="";
@@ -64,3 +71,30 @@ async function search(URLs){
     } catch (error) {}
 }
 search(URLs);
+async function buttonss(URLs) {
+    try {
+        const response = await fetch(URLs);
+        if(response.status !=200) {
+            throw new Error (response.statusText);
+    }
+        const data = await response.json();
+        let buttons = document.querySelectorAll('.btn');
+        buttons.forEach((btn) => btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        let level = btn.textContent.toLowerCase();
+        let newArr = data.filter((data) => data.level === level);
+        clearfields();
+        insertCards(newArr);
+    })
+    );
+        DOMSelectors.all.addEventListener('click', function() {
+        let newArr = data.filter((fruit) => fruit.taste != 'null');
+        clearfields();
+        insertCards(newArr);
+    });
+    } catch (error) {
+        console.log(error, "There was an error 🤓");
+        document.querySelector("h1").textContent = "Error 🤓🤓🤓"
+    }
+}
+buttonss(URLs);
