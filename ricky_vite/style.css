@@ -77,7 +77,6 @@ h3 {
 .section-title {
   font-size:var(--h1);
 }
-
 .btn, 
 .btn:link,
 .btn:visited {
@@ -86,7 +85,14 @@ h3 {
 .btn:hover {
   box-shadow: 0 10px 0.5rem rgba(0, 0, 0, 0);
 }
-
+@keyframes expand {
+  100% {
+     transform: scale(1.5);
+    }
+  }
+.card:hover {
+  transform: scale(1.1);
+  }
 .column, #search, #search2,.theme-btn {
   background-color: rgb(255, 255, 255);
     border-radius: 5px;

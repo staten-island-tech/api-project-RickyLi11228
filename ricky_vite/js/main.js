@@ -22,7 +22,7 @@ function insertCards(arr){
             "beforeend",
             `<div class="card">
                 <h3 class = "name">${card.name}</h3>
-                <img src="${card.img}" class="img" alt="${card.name, "pic"}">
+                <img src="${card.img}" class="img" alt="${card.name} Picture">
                 <h4>Level: ${card.level}</h4> 
             </div>`
         )
@@ -68,33 +68,16 @@ async function search(URLs){
                 document.querySelector("h1").textContent = "Error 🤓🤓🤓"
               }
         });
+        let buttons = document.querySelectorAll('.btn');
+        buttons.forEach((btn) =>
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          clearfields();
+          let type = btn.textcontent;
+          let newArr = data.filter((data) => data.level === type);
+          insertCards(newArr);
+          console.log(newArr);
+        }));
     } catch (error) {}
 }
 search(URLs);
-async function buttonss(URLs) {
-    try {
-        const response = await fetch(URLs);
-        if(response.status !=200) {
-            throw new Error (response.statusText);
-    }
-        const data = await response.json();
-        let buttons = document.querySelectorAll('.btn');
-        buttons.forEach((btn) => btn.addEventListener('click', function (event) {
-        event.preventDefault();
-        let level = btn.textContent.toLowerCase();
-        let newArr = data.filter((data) => data.level === level);
-        clearfields();
-        insertCards(newArr);
-    })
-    );
-        DOMSelectors.all.addEventListener('click', function() {
-        let newArr = data.filter((fruit) => fruit.taste != 'null');
-        clearfields();
-        insertCards(newArr);
-    });
-    } catch (error) {
-        console.log(error, "There was an error 🤓");
-        document.querySelector("h1").textContent = "Error 🤓🤓🤓"
-    }
-}
-buttonss(URLs);
