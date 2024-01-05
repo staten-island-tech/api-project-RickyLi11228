@@ -93,9 +93,10 @@ h3 {
 .card:hover {
   transform: scale(1.1);
   }
-.column, #search, #search2,.theme-btn {
+#search, #search2,#input, #input2{
   background-color: rgb(255, 255, 255);
-    border-radius: 5px;
+    border-radius: 10px;
     border-color: black;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    height: 80px;
 }
