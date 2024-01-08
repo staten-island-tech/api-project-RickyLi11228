@@ -30,7 +30,12 @@ function insertCards(arr){
         )
     });
 }
-
+function error(){
+        DOMSelectors.column.insertAdjacentHTML(
+            "afterend",
+            `<h1>Error</h1>`
+        )
+        };
 const URLs = `https://digimon-api.vercel.app/api/digimon`;
 async function getData(URLs) {
 try {
@@ -47,10 +52,11 @@ try {
         let type = btn.textContent.toLowerCase();
         let newArr = data.filter((data) => data.level.toLowerCase() === type);
         data.forEach((data)=>console.log(data.level))
-        insertCards(newArr);
-        console.log(newArr);
-        console.log(type);
-        console.log(data.level);
+        if (newArr[length] > 0) {
+            insertCards(newArr);
+          } else {
+            error()
+          }
       })
     );
     DOMSelectors.all.addEventListener('click', function() {
