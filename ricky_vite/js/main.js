@@ -28,18 +28,7 @@ function insertCards(arr){
         )
     });
 }
-function button(x){
-    let buttons = document.querySelectorAll('.btn');
-    buttons.forEach((btn) => btn.addEventListener('click', function (event) {
-    event.preventDefault();
-    clearfields();
-    let type = btn.textContent.toLowerCase();
-    let newArr = x.filter((data) => data.level === type);
-    insertCards(newArr);
-    console.log(newArr);
-  })
-);
-}
+
 const URLs = `https://digimon-api.vercel.app/api/digimon`;
 async function getData(URLs) {
 try {
@@ -49,7 +38,19 @@ try {
     }
     const data = await response.json();
     insertCards(data);
-    button(data)
+        let buttons = document.querySelectorAll('.btn');
+        buttons.forEach((btn) => btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        clearfields();
+        let type = btn.textContent.toLowerCase();
+        let newArr = data.filter((data) => data.level.toLowerCase() === type);
+        data.forEach((data)=>console.log(data.level))
+        insertCards(newArr);
+        console.log(newArr);
+        console.log(type);
+        console.log(data.level);
+      })
+    );
 } catch (error) {
     console.log(error, "There was an error 🤓");
     document.querySelector("h1").textContent = "Error 🤓🤓🤓"
