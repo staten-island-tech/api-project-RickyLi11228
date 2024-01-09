@@ -91,5 +91,7 @@ async function search(URLs){
               }
         });
     } catch (error) {}
+    console.log(error, "There was an error 🤓");
+    document.querySelector("h1").textContent = "Error 🤓🤓🤓"
 }
 search(URLs);
