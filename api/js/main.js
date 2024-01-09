@@ -32,10 +32,11 @@ function insertCards(arr){
 }
 function error(){
         DOMSelectors.column.insertAdjacentHTML(
-            "afterend",
-            `<h1>Error</h1>`
+            "beforeend",
+            `<h1>NO DIGIONS FOUND</h1>`
         )
         };
+
 const URLs = `https://digimon-api.vercel.app/api/digimon`;
 async function getData(URLs) {
 try {
@@ -52,11 +53,7 @@ try {
         let type = btn.textContent.toLowerCase();
         let newArr = data.filter((data) => data.level.toLowerCase() === type);
         data.forEach((data)=>console.log(data.level))
-        if (newArr[length] > 0) {
-            insertCards(newArr);
-          } else {
-            error()
-          }
+        insertCards(newArr);
       })
     );
     DOMSelectors.all.addEventListener('click', function() {
@@ -76,20 +73,20 @@ async function search(URLs){
             let input = DOMSelectors.input.value;
             let newArr = data.filter((data) => data.name.toLowerCase().includes(input));
             clearfields();
-            if (newArr[length] != 1) {
+            if (newArr[length] > 0) {
                 insertCards(newArr);
               } else {
-                document.querySelector("h1").textContent = "Error 🤓🤓🤓"
+                error();
               }
         });
         DOMSelectors.search2.addEventListener('click', function() {
             let input2 = DOMSelectors.input2.value;
             let newArr = data.filter((data) => data.level.toLowerCase().includes(input2));
             clearfields();
-            if (newArr[length] != 1) {
+            if (newArr[length] > 0) {
                 insertCards(newArr);
               } else {
-                document.querySelector("h1").textContent = "Error 🤓🤓🤓"
+                error();
               }
         });
     } catch (error) {}
