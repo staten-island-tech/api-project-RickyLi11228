@@ -86,3 +86,13 @@ async function search(URLs){
         });
 }
 search(URLs);
+async function getData(URLs){
+        const response = await fetch(URLs);
+        const data = await response.json();
+        DOMSelectors.search2.addEventListener('click', function() {
+        let newArr = data.sort
+        insertCards(newArr)
+        });
+
+getData(URLs);
+}
