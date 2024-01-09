@@ -73,8 +73,9 @@ async function search(URLs){
             let input = DOMSelectors.input.value;
             let newArr = data.filter((data) => data.name.toLowerCase().includes(input));
             clearfields();
-            if (newArr[length] > 0) {
+            if (newArr.length != 0) {
                 insertCards(newArr);
+                console.log(newArr);
               } else {
                 error();
               }
@@ -83,7 +84,7 @@ async function search(URLs){
             let input2 = DOMSelectors.input2.value;
             let newArr = data.filter((data) => data.level.toLowerCase().includes(input2));
             clearfields();
-            if (newArr[length] > 0) {
+            if (newArr.length != 0) {
                 insertCards(newArr);
               } else {
                 error();
