@@ -39,7 +39,6 @@ function error(){
 
 const URLs = `https://digimon-api.vercel.app/api/digimon`;
 async function getData(URLs) {
-try {
     const response = await fetch(URLs);
     if(response.status !=200) {
         throw new Error (response.statusText);
@@ -59,14 +58,9 @@ try {
     DOMSelectors.all.addEventListener('click', function() {
         insertCards(data);
     });
-} catch (error) {
-    console.log(error, "There was an error 🤓");
-    document.querySelector("h1").textContent = "Error 🤓🤓🤓"
-}
 }
 getData(URLs);
 async function search(URLs){
-    try {
         const response = await fetch(URLs);
         const data = await response.json();
         DOMSelectors.search.addEventListener('click', function() {
@@ -90,8 +84,5 @@ async function search(URLs){
                 error();
               }
         });
-    } catch (error) {}
-    console.log(error, "There was an error 🤓");
-    document.querySelector("h1").textContent = "Error 🤓🤓🤓"
 }
 search(URLs);
